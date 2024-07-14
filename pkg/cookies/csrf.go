@@ -139,7 +139,6 @@ func (c *csrf) SetCookie(rw http.ResponseWriter, req *http.Request) (*http.Cooki
 		encoded,
 		c.cookieOpts,
 		c.cookieOpts.CSRFExpire,
-		c.time.Now(),
 	)
 	http.SetCookie(rw, cookie)
 
@@ -154,7 +153,6 @@ func (c *csrf) ClearCookie(rw http.ResponseWriter, req *http.Request) {
 		"",
 		c.cookieOpts,
 		time.Hour*-1,
-		c.time.Now(),
 	))
 }
 
