@@ -15,45 +15,39 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
-      - name: Setup Pages
-        id: pages
-        uses: actions/configure-pages@v5
-      
-      - uses: actions/setup-node@v4
         with:
-          # renovate: datasource=node-version depName=node
-          node-version: 20
-          cache: npm
-          cache-dependency-path: "./docs/package-lock.json"
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: 3.x
 
       - name: Test Build
-        working-directory: ./docs
         run: |
-          npm ci
-          npm run build
+          cd docs
+          bash build.sh
 
   build-docs:
     if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
-      - uses: actions/setup-node@v4
         with:
-          # renovate: datasource=node-version depName=node
-          node-version: 20
+          fetch-depth: 0
 
-      - name: Build docusaurus
-        working-directory: ./docs
+      - uses: actions/setup-python@v5
+        with:
+          python-version: 3.x
+
+      - name: Build docs
         run: |
-          npm ci
-          npm run build
+          cd docs
+          bash build.sh
       
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./docs/build
+          path: ./docs/site
 
   deploy-docs:
     needs: build-docs

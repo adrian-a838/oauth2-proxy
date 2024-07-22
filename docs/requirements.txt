@@ -1,0 +1,7 @@
+mkdocs 
+mkdocs-drawio
+mkdocs-material 
+mkdocs-autolinks-plugin 
+mkdocs-git-revision-date-localized-plugin 
+fontawesome_markdown 
+pymdown-extensions

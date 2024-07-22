@@ -1,33 +1,21 @@
-# Website
+# Mkdocs setup for oauth2-proxy
 
-This website is built using [Docusaurus 2](https://v2.docusaurus.io/), a modern static website generator.
+For locally testing a change to the docs you need have python installed:
 
-## Installation
+1. (Recommended) Create python venv
 
-```console
-npm install
+```
+python3 -m venv venv
+source venv/bin/activate
 ```
 
-## Local Development
+2. Install dependencies
 
-```console
-npm start
+```
+pip install -r requirements.txt
 ```
 
-This command starts a local development server and open up a browser window. Most changes are reflected live without having to restart the server.
-
-## Build
-
-```console
-npm build
+3. Select a version and test
 ```
-
-This command generates static content into the `build` directory and can be served using any static contents hosting service.
-
-## Deployment
-
-```console
-GIT_USER=<Your GitHub username> USE_SSH=true npm deploy
+cat mkdocs.yaml <version>.yaml | mkdocs <serve/build> --config-file -
 ```
-
-If you are using GitHub pages for hosting, this command is a convenient way to build the website and push to the `gh-pages` branch.
